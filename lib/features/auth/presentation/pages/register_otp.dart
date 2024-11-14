@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:rakhsa/common/constants/theme.dart';
 import 'package:rakhsa/common/helpers/snackbar.dart';
+import 'package:rakhsa/common/utils/assets_source.dart';
 import 'package:rakhsa/features/auth/presentation/provider/resend_otp_notifier.dart';
 import 'package:rakhsa/features/auth/presentation/provider/verify_otp_notifier.dart';
 import 'package:rakhsa/features/dashboard/presentation/pages/dashboard.dart';
@@ -26,7 +27,7 @@ class _RegisterOtpState extends State<RegisterOtp> {
 
   final StopWatchTimer _timer = StopWatchTimer(
     mode: StopWatchMode.countDown,
-    presetMillisecond: StopWatchTimer.getMinute(2),
+    presetMillisecond: StopWatchTimer.getMilliSecFromMinute(2),
   );
 
   String _parseSeconds(int value) {
@@ -95,7 +96,7 @@ class _RegisterOtpState extends State<RegisterOtp> {
                         decoration: const BoxDecoration(
                           image: DecorationImage(
                             fit: BoxFit.fill,
-                            image: AssetImage(loginOrnament)
+                            image: AssetImage(AssetSource.loginOrnament)
                           )
                         ),
                       ),

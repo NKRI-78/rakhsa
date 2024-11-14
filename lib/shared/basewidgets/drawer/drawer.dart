@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:rakhsa/common/constants/theme.dart';
+import 'package:rakhsa/common/utils/assets_source.dart';
 import 'package:rakhsa/common/utils/color_resources.dart';
 import 'package:rakhsa/common/utils/dimensions.dart';
 
@@ -40,7 +41,7 @@ class DrawerWidgetState extends State<DrawerWidget> {
               btnTxt: "Notification",
             ),
 
-            Image.asset(logoutTitle,
+            Image.asset(AssetSource.logoutTitle,
               width: 110.0,
               height: 110.0,
             )

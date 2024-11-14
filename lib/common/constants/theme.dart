@@ -58,11 +58,6 @@ const gradeUtsColor = Color(0xFF4BCC96);
 const gradeUasColor = Color(0xFF5AA9F6);
 const gradeIpkColor = Color(0xFFF89D4A);
 
-//images
-const String logoutTitle = "assets/images/logout.png";
-const String loginOrnament = "assets/images/login-ornament.png";
-const String signWithGoogle = "assets/images/sign-with-google.png";
-
 //Font Size
 const double fontSizeOverExtraSmall = 9.0;
 const double fontSizeExtraSmall = 10.0;

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:rakhsa/features/dashboard/presentation/pages/home.dart';
+import 'package:rakhsa/features/pages/event/persentation/pages/list.dart';
+import 'package:rakhsa/features/pages/information/presentation/pages/list.dart';
+import 'package:rakhsa/features/pages/news/persentation/pages/list.dart';
 
 import 'package:rakhsa/shared/basewidgets/dashboard/bottom_navybar.dart';
 import 'package:rakhsa/shared/basewidgets/drawer/drawer.dart';
@@ -26,16 +29,16 @@ class DashboardScreenState extends State<DashboardScreen> {
       'title': 'Home',
     },
     {
-      'page': const SizedBox(),
-      'title': 'Menu 1',
+      'page': const InformationListPage(),
+      'title': 'Informasi',
     },
     {
-      'page': const SizedBox(),
-      'title': 'Menu 2',
+      'page': const NewsListPage(),
+      'title': 'Berita',
     },
     {
-      'page': const SizedBox(),
-      'title': 'Menu 3',
+      'page': const EventListPage(),
+      'title': 'Event',
     },
   ];
 
@@ -52,6 +55,7 @@ class DashboardScreenState extends State<DashboardScreen> {
   
   @override
   Widget build(BuildContext context) {
+    debugPrint("Select $selectedPageIndex");
     return Scaffold(
       key: globalKey,
       drawer: const SafeArea(
@@ -80,10 +84,10 @@ class DashboardScreenState extends State<DashboardScreen> {
           ),
           BottomNavyBarItem(
             icon: const Icon(
-              Icons.list,
+              Icons.note_outlined,
               size: 20.0,
             ),
-            title: Text('Menu 1',
+            title: Text('Informasi',
               style: robotoRegular.copyWith(
                 fontSize: Dimensions.fontSizeDefault,
                 color: ColorResources.white
@@ -93,10 +97,10 @@ class DashboardScreenState extends State<DashboardScreen> {
           ),
           BottomNavyBarItem(
             icon: const Icon(
-              Icons.list,
+              Icons.newspaper,
               size: 20.0,
             ),
-            title: Text('Menu 2',
+            title: Text('Berita',
               style: robotoRegular.copyWith(
                 fontSize: Dimensions.fontSizeDefault,
                 color: ColorResources.white
@@ -106,10 +110,10 @@ class DashboardScreenState extends State<DashboardScreen> {
           ),
           BottomNavyBarItem(
             icon: const Icon(
-              Icons.list,
+              Icons.event,
               size: 20.0,
             ),
-            title: Text('Menu 3',
+            title: Text('Event',
               style: robotoRegular.copyWith(
                 fontSize: Dimensions.fontSizeDefault,
                 color: ColorResources.white

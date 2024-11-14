@@ -484,8 +484,8 @@ class SosButtonState extends State<SosButton> with TickerProviderStateMixin {
                 return Transform.scale(
                   scale: pulseAnimation.value * scaleFactor,
                   child: Container(
-                    width: 55, 
-                    height: 55,
+                    width: 100, 
+                    height: 100,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       color: const Color(0xFFFE1717).withOpacity(0.2 / scaleFactor),
@@ -496,11 +496,11 @@ class SosButtonState extends State<SosButton> with TickerProviderStateMixin {
             ),
           if (isPressed)
             SizedBox(
-              width: 145,
-              height: 145,
+              width: 200,
+              height: 200,
               child: CircularProgressIndicator(
                 valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFF1FFE17)),
-                strokeWidth: 6,
+                strokeWidth: 20,
                 value: 1 - timerController.value,
                 backgroundColor: Colors.transparent,
               ),
@@ -512,8 +512,8 @@ class SosButtonState extends State<SosButton> with TickerProviderStateMixin {
               animation: timerController,
               builder: (BuildContext context, Widget? child) {
                 return Container(
-                  width: 130,
-                  height: 130,
+                  width: 200,
+                  height: 200,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: const Color(0xFFFE1717),

@@ -4,6 +4,7 @@ import 'package:rakhsa/common/constants/theme.dart';
 import 'package:rakhsa/common/helpers/enum.dart';
 import 'package:rakhsa/common/helpers/snackbar.dart';
 import 'package:provider/provider.dart';
+import 'package:rakhsa/common/utils/assets_source.dart';
 
 import 'package:rakhsa/common/utils/color_resources.dart';
 import 'package:rakhsa/common/utils/custom_themes.dart';
@@ -171,7 +172,7 @@ class RegisterPageState extends State<RegisterPage> {
                       decoration: const BoxDecoration(
                         image: DecorationImage(
                           fit: BoxFit.fill,
-                          image: AssetImage(loginOrnament)
+                          image: AssetImage(AssetSource.loginOrnament)
                         )
                       ),
                     ),
