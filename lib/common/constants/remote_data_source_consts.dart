@@ -11,6 +11,10 @@ class RemoteDataSourceConsts {
   static const String websocketUrlDev = 'ws://192.168.1.15:9998';
 
   static const String geminiApiKey = 'AIzaSyBROwuSIdITYdSU7GWWWg-oBZntbSX_D8E';
+
+  static const String socketIoUrl = 'http://192.168.1.22:3951';
+  static const String uploadMedia = 'https://media.rahmadfani.cloud';
+  static const String baseUrlApiMarlinda = 'http://192.168.1.22:3950';
   
   // dev
   // ws://192.168.1.15:9998

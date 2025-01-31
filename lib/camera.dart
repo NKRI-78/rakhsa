@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
@@ -8,6 +9,9 @@ import 'package:provider/provider.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 import 'package:camera/camera.dart';
+import 'package:rakhsa/features/chatV2/presentation/provider/camera.dart';
+import 'package:rakhsa/injection.dart';
+import 'package:rakhsa/location.dart';
 
 import 'package:rakhsa/shared/basewidgets/modal/modal.dart';
 
@@ -19,6 +23,9 @@ import 'package:rakhsa/features/media/presentation/provider/upload_media_notifie
 
 
 import 'package:rakhsa/websockets.dart';
+import 'package:video_compress/video_compress.dart';
+
+import 'common/constants/remote_data_source_consts.dart';
 
 class CameraPage extends StatefulWidget {
   final String location;
@@ -44,6 +51,7 @@ class CameraPageState extends State<CameraPage> {
 
   late WebSocketsService webSocketsService;
   late UploadMediaNotifier uploadMediaNotifier;
+  late CameraProvider cameraProvider;
 
   bool loading = false;
 
@@ -58,6 +66,7 @@ class CameraPageState extends State<CameraPage> {
 
     webSocketsService = context.read<WebSocketsService>();
     uploadMediaNotifier = context.read<UploadMediaNotifier>();
+    cameraProvider = context.read<CameraProvider>();
 
     initializeCamera();
   }
@@ -86,29 +95,38 @@ class CameraPageState extends State<CameraPage> {
 
       setState(() => loading = true);
 
-      await uploadMediaNotifier.send(file: file, folderName: "pictures");
-
-      if(uploadMediaNotifier.message != "") {
-        GeneralModal.info(msg: uploadMediaNotifier.message);
-        return;
-      }
-
+      final fileName = file.path.split('/').last;
+      var formData = FormData.fromMap({
+        'files': [
+          await MultipartFile.fromFile(file.path,
+                filename: fileName,)
+        ],
+        'folder': 'AMULET-SOS',
+        'app': 'AMULET'
+      });
+      final res = await locator<Dio>().request('${RemoteDataSourceConsts.uploadMedia}/api/v1/media',
+        data: formData,
+        options: Options(
+          method: 'PUT',
+        ),
+      );
+      debugPrint("PROG :  ${res.data}");
+      Map<String, dynamic> data = res.data;
+  
       setState(() => loading = false);
 
-      String media = uploadMediaNotifier.entity!.path;
-      String ext = media.split('/').last.split('.').last;
+      final position = await determinePosition();
 
-      webSocketsService.sos(
-        location: widget.location,
-        country: widget.country, 
-        media: media,
-        ext: ext,
-        lat: widget.lat, 
-        lng: widget.lng, 
+      await cameraProvider.createTicket(
+        description: "Butuh pertolongan",
+        media_link: data["data"][0]["url"],
+        media_type: data["data"][0]["type"],
+        latitude: position.latitude.toString(), 
+        longitude: position.longitude.toString(),
       );
       
       if(mounted) {
-        Navigator.pop(context, "start");
+        Navigator.pop(context);
       }
 
     } catch (e) {
@@ -146,28 +164,44 @@ class CameraPageState extends State<CameraPage> {
     if (controller == null || !isRecording) return;
 
     try {
-      final video = await controller!.stopVideoRecording();
+      XFile video = await controller!.stopVideoRecording();
       File file = File(video.path);
 
       setState(() => loading = true);
-      
-      await uploadMediaNotifier.send(file: file, folderName: "videos");
+      print("Video : ${file.path}");
 
+
+      final fileName = file.path.split('/').last;
+      var formData = FormData.fromMap({
+        'files': [
+          await MultipartFile.fromFile(file.path, filename: fileName,)
+        ],
+        'folder': 'AMULET-SOS',
+        'app': 'AMULET'
+      });
+      final res = await locator<Dio>().request('${RemoteDataSourceConsts.uploadMedia}/api/v1/media',
+        data: formData,
+        options: Options(
+          method: 'PUT',
+        ),
+      );
+      debugPrint("PROG :  ${res.data}");
+      Map<String, dynamic> data = res.data;
+  
       setState(() => loading = false);
 
-      String media = uploadMediaNotifier.entity!.path;
-      String ext = media.split('/').last.split('.').last;
-      
-      webSocketsService.sos(
-        location: widget.location,
-        country: widget.country,
-        media: media,
-        ext: ext,
-        lat: widget.lat, lng: widget.lng, 
+      final position = await determinePosition();
+
+      await cameraProvider.createTicket(
+        description: "Butuh pertolongan",
+        media_link: data["data"][0]["url"],
+        media_type: data["data"][0]["type"],
+        latitude: position.latitude.toString(), 
+        longitude: position.longitude.toString(),
       );
 
       if(mounted) {
-        Navigator.pop(context, "start");
+        Navigator.pop(context);
       }
 
       setState(() => isRecording = false);

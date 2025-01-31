@@ -18,6 +18,8 @@ import 'package:rakhsa/features/auth/presentation/provider/verify_otp_notifier.d
 import 'package:rakhsa/features/chat/presentation/provider/get_chats_notifier.dart';
 import 'package:rakhsa/features/chat/presentation/provider/get_messages_notifier.dart';
 import 'package:rakhsa/features/chat/presentation/provider/insert_message_notifier.dart';
+import 'package:rakhsa/features/chatV2/presentation/provider/camera.dart';
+import 'package:rakhsa/features/chatV2/presentation/provider/messages.dart';
 import 'package:rakhsa/features/dashboard/presentation/provider/dashboard_notifier.dart';
 import 'package:rakhsa/features/dashboard/presentation/provider/detail_news_notifier.dart';
 import 'package:rakhsa/features/dashboard/presentation/provider/expire_sos_notifier.dart';
@@ -85,4 +87,6 @@ List<SingleChildWidget> independentServices = [
   ChangeNotifierProvider.value(value: di.locator<GetNearbyPlacenNotifier>()),
   ChangeNotifierProvider.value(value: di.locator<WeatherNotifier>()),
   ChangeNotifierProvider.value(value: di.locator<WebSocketsService>()),
+  ChangeNotifierProvider.value(value: di.locator<CameraProvider>()),
+  ChangeNotifierProvider.value(value: di.locator<MessageProvider>()),
 ];

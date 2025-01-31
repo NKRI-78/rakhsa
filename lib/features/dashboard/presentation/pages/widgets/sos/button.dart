@@ -162,44 +162,22 @@ class SosButtonState extends State<SosButton> with TickerProviderStateMixin {
                   ),
                 ),
               GestureDetector(
-                onLongPressStart: (LongPressStartDetails longPressStartDetails) async => widget.isConnected 
-                ? notifier.isTimerRunning 
-                ? () {} 
-                : widget.loadingGmaps 
-                ? () {} 
-                : await handleLongPressStart() 
-                : () {},
-                onLongPressEnd: (_) => widget.isConnected 
-                ? notifier.isTimerRunning 
-                ? () {} 
-                : widget.loadingGmaps 
-                ? () {} 
-                : handleLongPressEnd() 
-                : () {},
+                onLongPressStart: (_) => handleLongPressStart(),
+                onLongPressEnd: (_) => handleLongPressEnd(),
                 child: AnimatedBuilder(
                   animation: notifier.timerController!,
                   builder: (BuildContext context, Widget? child) {
                     return Bouncing(
-                      onPress: () async => widget.isConnected 
-                      ? notifier.isTimerRunning 
-                      ? () {} 
-                      : widget.loadingGmaps 
-                      ? () {} 
-                      : () {} 
-                      : () {},
+                      onPress: () {  },
                       child: Container(
                         width: 180,
                         height: 180,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: widget.isConnected
-                            ? const Color(0xFFFE1717)
-                            : const Color(0xFF7A7A7A),
+                          color: const Color(0xFFFE1717),
                           boxShadow: [
                             BoxShadow(
-                              color: widget.isConnected 
-                              ? const Color(0xFFFE1717).withOpacity(0.5) 
-                              : const Color(0xFF7A7A7A).withOpacity(0.5),
+                              color: const Color(0xFFFE1717).withOpacity(0.5),
                               blurRadius: 10,
                               spreadRadius: 5,
                             ),

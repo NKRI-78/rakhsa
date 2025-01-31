@@ -93,7 +93,7 @@ class RoutesNavigation {
       case passportDocument: 
         return MaterialPageRoute(builder: (_) => const PassportDocumentPage());
       case loginFr: 
-        return MaterialPageRoute(builder: (_) => const LoginFrPage(fromHome: false));
+        return MaterialPageRoute(builder: (_) => const LoginPage());
       case login: 
         return MaterialPageRoute(builder: (_) => const LoginPage());
       case registerFr: 

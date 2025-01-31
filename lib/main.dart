@@ -39,6 +39,7 @@ import 'package:rakhsa/injection.dart' as di;
 import 'package:rakhsa/common/helpers/storage.dart';
 
 import 'package:rakhsa/providers.dart';
+import 'package:rakhsa/socket.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:workmanager/workmanager.dart';
@@ -179,7 +180,11 @@ Future<void> main() async {
   ..dismissOnTap = false;
 
   runApp(MultiProvider(
-    providers: providers, 
+    providers: [...providers, 
+    ChangeNotifierProvider(
+      lazy: false,
+      create: (_)=> SocketServices()..connect())
+    ],
     child: const MyApp()
   ));
 }

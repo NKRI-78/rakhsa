@@ -20,7 +20,7 @@ enum ConnectionIndicator { red, yellow, green }
 class WebSocketsService extends ChangeNotifier {
 
   WebSocketsService() {
-    connect();
+    // connect();
   }
 
   ConnectionIndicator _connectionIndicator = ConnectionIndicator.yellow;

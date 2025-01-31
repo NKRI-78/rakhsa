@@ -21,6 +21,8 @@ import 'package:rakhsa/features/auth/presentation/provider/update_profile_notifi
 import 'package:rakhsa/features/chat/data/datasources/chat_remote_data_source.dart';
 import 'package:rakhsa/features/chat/domain/usecases/insert_message.dart';
 import 'package:rakhsa/features/chat/presentation/provider/insert_message_notifier.dart';
+import 'package:rakhsa/features/chatV2/presentation/provider/camera.dart';
+import 'package:rakhsa/features/chatV2/presentation/provider/messages.dart';
 import 'package:rakhsa/features/dashboard/data/datasources/dashboard_remote_data_source.dart';
 import 'package:rakhsa/features/dashboard/domain/usecases/detail_news.dart';
 import 'package:rakhsa/features/dashboard/domain/usecases/sos_rating.dart';
@@ -139,6 +141,9 @@ void init() {
   locator.registerLazySingleton<EcommerceRepo>(() => EcommerceRepo());
   locator.registerLazySingleton<MediaRepo>(() => MediaRepo());
   locator.registerLazySingleton<DocumentRepository>(() => DocumentRepositoryImpl(remoteDatasource: locator()));
+
+  locator.registerLazySingleton<CameraProvider>(() => CameraProvider());
+  locator.registerLazySingleton<MessageProvider>(() => MessageProvider());
 
   // USE CASE
   locator.registerLazySingleton(() => GetNewsUseCase(locator()));
